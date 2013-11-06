@@ -7,7 +7,7 @@ As a result you will get a executable jar with all dependencies stored in ```./t
 named like ```page-generator-0.0.1-SNAPSHOT-jar-with-dependencies.jar```.
 
 In order to run page-generator you need to invoke:
-```java -jar page-generator-0.0.1-SNAPSHOT-jar-with-dependencies.jar````
+```java -jar page-generator-0.0.1-SNAPSHOT-jar-with-dependencies.jar```
 
 ## TODO
 
