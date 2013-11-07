@@ -50,7 +50,7 @@ public class CLI {
             page.save(pageFile);
         }
         
-        ZipOutputFile result = new ZipOutputFile(cliArgs.output + ".zip");
+        ZipOutputFile result = new ZipOutputFile(cliArgs.output);
         result.addFile(pageFile);
         result.addFile(boxFile);
         result.close();

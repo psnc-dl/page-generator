@@ -23,7 +23,6 @@ import pl.psnc.synat.cutter.image.ImageProcesor;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
-import com.google.common.base.Strings;
 
 public class Cutter {
 
@@ -32,15 +31,10 @@ public class Cutter {
     private static final String TOKEN_ITALIC = "_italic";
 
     private static final Object TOKEN_NOISE = "_noise";
-
-    private static final String ZIP_EXT = ".zip";
     
     public class CutterArguments extends AletheiaArguments implements Command {
 
-        @Parameter(names = "--output", description = "path where the zipped output should be stored", required = false)
-        private String outputPath;
-
-        @Parameter(names = "--filename", description = "name for output archive, zip extension will be added", required = true)
+        @Parameter(names = "--output", description = "name and path for output archive", required = true)
         private String outputFilename;
 
         @Parameter(names = "--image", description = "file name of a image input", required = true)
@@ -51,28 +45,6 @@ public class Cutter {
 
         @Parameter(names = "--only-read-xml", description = "reads only xml file, does not generate anything")
         private Boolean onlyReadXml;
-
-        public String getOutputPath(){
-            return outputPath;
-        }
-        
-        
-        public String getOutputFilename() {
-            return outputFilename;
-        }
-
-        public String getFullOutputPath() {
-            if (Strings.isNullOrEmpty(outputPath)) {
-                return getOutputFilename();
-            }
-            
-            StringBuilder result = new StringBuilder(outputPath);
-            if (!outputPath.endsWith(File.separator)) {
-                result.append(File.separator);
-            }
-            result.append(getOutputFilename());
-            return result.toString();
-        }
 
         public String getInputImageFilename() {
             return inputImageFilename;
@@ -92,6 +64,11 @@ public class Cutter {
         public boolean isReadXmlOnly() {
             return onlyReadXml == null ? false : onlyReadXml;
         }
+        
+
+        public String getOutputFilename() {
+            return outputFilename;
+        }
     }
 
 
@@ -103,7 +80,7 @@ public class Cutter {
     private void run()
             throws IOException, JAXBException {
         
-    	outputZipArchive = new ZipOutputFile(arguments.getFullOutputPath() + ZIP_EXT);
+    	outputZipArchive = new ZipOutputFile(arguments.getOutputFilename());
 
         arguments.readNoiseList();
         System.out.println("Noise words: " + arguments.getNoiseWords());
