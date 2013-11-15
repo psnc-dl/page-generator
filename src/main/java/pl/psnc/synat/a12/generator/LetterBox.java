@@ -1,5 +1,6 @@
 package pl.psnc.synat.a12.generator;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -44,8 +45,22 @@ public class LetterBox extends BoundingBox implements Sortable {
 
         glyph = (char) Integer.parseInt(data[3]);
     }
+ 
+    public LetterBox(File file, int x1, int y1, int x2, int y2, char glyph, String fontType, boolean noised)
+            throws IOException {
 
-
+        this.italic = fontType.equals(TOKEN_ITALIC);
+        this.gothic = fontType.equals(PREFIX_GOTHIC);
+        this.noised = noised;
+        this.image = ImageIO.read(file);
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        this.glyph = glyph;
+        
+    }
+    
     public LetterBox(LetterBox box, int newX1, int newY2) {
         italic = box.italic;
         gothic = box.gothic;

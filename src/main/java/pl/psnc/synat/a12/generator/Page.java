@@ -41,7 +41,7 @@ public class Page extends BoxFilter {
         Graphics graphics = page.getGraphics();
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, width, height);
-
+        
         for (BoxLine line : lines) {
 
             for (LetterBox box : line.getBoxes()) {

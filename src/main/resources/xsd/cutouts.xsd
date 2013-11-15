@@ -1,0 +1,50 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="letter_box">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="name"/>
+                <xs:element name="size">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:short" name="width"/>
+                            <xs:element type="xs:short" name="height"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="bounding_box">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="coordinate" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:short" name="x"/>
+                                        <xs:element type="xs:short" name="y"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element type="xs:string" name="font_type"/>
+                <xs:element type="xs:int" name="letter_id"/>
+                <xs:element type="xs:byte" name="line_number"/>
+                <xs:element type="xs:boolean" name="unreadable"/>
+                <xs:element type="xs:string" name="created_by"/>
+                <xs:element type="xs:byte" name="binarization_level"/>
+                <xs:element type="xs:string" name="manual_correction"/>
+                <xs:element name="image_file">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="orgin"/>
+                            <xs:element type="xs:string" name="final"/>
+                            <xs:element type="xs:string" name="binarized"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element type="xs:string" name="author_id"/>
+                <xs:element type="xs:string" name="symbol"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

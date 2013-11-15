@@ -7,12 +7,12 @@ import java.util.LinkedList;
 
 public class PageGenerator extends AbstractGenerator<LineEstimate> {
 
-	private File store;
-    private File[] images;
-    private int matchesCount;
-    private int multiMatched;
-    private Double spaceEmRatio;
-    private boolean overlap = false;
+    protected File store;
+    protected  File[] images;
+    protected  int matchesCount;
+    protected int multiMatched;
+    protected Double spaceEmRatio;
+    protected boolean overlap = false;
 
 
     public PageGenerator(String path) {
@@ -22,7 +22,8 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
     }
 
 
-    public void init() {
+    @Override
+    public void init() throws Exception {
         for (File file : images) {
             try {
                 LetterBox box = new LetterBox(file);
@@ -57,7 +58,7 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
     }
 
 
-    private void adjustLines() {
+    protected void adjustLines() {
         Collections.sort(lines, new TopDownOrder());
 
         for (LineEstimate line : lines) {
@@ -70,7 +71,7 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
     }
 
 
-    private void addMatch(LetterBox box) {
+    protected void addMatch(LetterBox box) {
         matchesCount = 0;
         LineEstimate matchingLine = findMatch(box);
 
@@ -120,7 +121,7 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
     }
 
 
-	public File getStore() {
-		return store;
-	}
+    public File getStore() {
+        return store;
+    }
 }

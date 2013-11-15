@@ -5,3 +5,7 @@
 *.war
 *.ear
 /target/
+/nbactions-Cutter.xml
+/nbactions-CLI.xml
+/nb-configuration.xml
+/nbactions.xml

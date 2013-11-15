@@ -9,7 +9,7 @@ public abstract class AbstractGenerator<T extends BoxLine> {
 
     protected List<T> lines;
     protected boolean verbose;
-    private boolean showFontType;
+    protected boolean showFontType;
     private boolean skipItalic;
     private boolean skipNoise;
     private boolean skipGothic;
@@ -19,6 +19,8 @@ public abstract class AbstractGenerator<T extends BoxLine> {
         this.lines = lines;
     }
 
+    public void init() throws Exception {
+    }
 
     public Map<Character, Integer> getBaseLines() {
         BaseLine baseLine = new BaseLine();
@@ -31,7 +33,7 @@ public abstract class AbstractGenerator<T extends BoxLine> {
         }
         return baseLine.getOffsets();
     }
-
+    
 
     public File generateBoxFile(String boxFilename, int height)
             throws IOException {

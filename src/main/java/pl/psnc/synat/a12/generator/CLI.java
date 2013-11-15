@@ -12,6 +12,9 @@ import pl.psnc.synat.a12.common.ZipOutputFile;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import com.google.common.base.Strings;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import pl.psnc.synat.a12.aletheia.CLIUtils;
 
 /**
  *
@@ -19,7 +22,7 @@ import com.google.common.base.Strings;
 public class CLI {
 
 	public static void main(String[] args)
-            throws IOException {
+            throws IOException, Exception {
         CommandLineArgs cliArgs = parseArguments(args);
 
         if (cliArgs == null) {
@@ -34,40 +37,33 @@ public class CLI {
             generator.getText().printText();
         }
 
-        File boxFile = generator.generateBoxFile(cliArgs.output + "-box", cliArgs.height);
+        Path outputPath = Paths.get(cliArgs.output);
+        File tmpDir = CLIUtils.createTmpDir(cliArgs.output);
+        String tmpDirName = tmpDir.getName();
+        String boxFilePath = CLIUtils.getBoxName(outputPath, tmpDirName);
+        String imageFilePath = CLIUtils.getImgName(outputPath, tmpDirName);
         
-
+        File boxFile = generator.generateBoxFile(boxFilePath, cliArgs.height);
         if (cliArgs.isSetBaseLines()) {
             Map<Character, Integer> offsets = generator.getBaseLines();
             BaseLinesFile file = new BaseLinesFile(cliArgs.baseLinesFilename);
             file.write(offsets);
         }
 
-        File pageFile = new File(cliArgs.output);
+        File pageFile = new File(imageFilePath);
         if (cliArgs.isSetGenerateImage()) {
             Page page = generator.getPage();
             page.draw(cliArgs.width, cliArgs.height);
             page.save(pageFile);
         }
         
-        ZipOutputFile result = new ZipOutputFile(cliArgs.output);
-        result.addFile(pageFile);
-        result.addFile(boxFile);
-        result.close();
-        
-        deleteFiles(pageFile, boxFile, generator.getStore());
+        CLIUtils.saveZip(cliArgs.output, pageFile, boxFile);
+        CLIUtils.deleteFiles(tmpDir, generator.getStore());
     }
 
-	private static void deleteFiles(File... files) {
-		for (File file : files) {
-			if (file != null) {
-				FileUtils.deleteQuietly(file);
-			}
-		}
-	}
-
+	
 	private static PageGenerator configureGenerator(CommandLineArgs cliArgs) {
-		String inputDirectory = extractParams(cliArgs.input);
+		String inputDirectory = CLIUtils.extractParams(cliArgs.input);
 		PageGenerator generator = new PageGenerator(inputDirectory);
 		generator.setEmRatio(cliArgs.emRatio);
 		generator.setVerbose(cliArgs.isVerbose());
@@ -79,6 +75,8 @@ public class CLI {
 		return generator;
 	}
 
+        
+        
 	private static CommandLineArgs parseArguments(String[] args) {
 		CommandLineArgs cliArgs = new CommandLineArgs();
 		JCommander commander = new JCommander(cliArgs);
@@ -102,21 +100,5 @@ public class CLI {
 				&& !Strings.isNullOrEmpty(commandLineArgs.output))
 			throw new ParameterException("Main parameters are required (\""
 					+ commander.getMainParameterDescription() + "\")");
-	}
-
-	private static String extractParams(String archive) {
-		File archiveFile = new File(archive);
-		File output = new File(prepareOutputDirName(archiveFile));
-		ZipExtractor extractor = new ZipExtractor();
-		extractor.extract(archiveFile, output);
-		return output.getPath();
-	}
-
-	private static String prepareOutputDirName(File archive) {
-		StringBuilder sbResult = new StringBuilder(
-				FileUtils.getTempDirectoryPath());
-		sbResult.append(File.separator);
-		sbResult.append(archive.getName().replace('.', '_'));
-		return sbResult.toString();
 	}
 }
