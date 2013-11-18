@@ -6,7 +6,7 @@
     <artifactId>page-generator</artifactId>
     <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>page-generator</name>
+    <name>Tesseract Page Generator</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
