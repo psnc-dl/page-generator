@@ -4,6 +4,7 @@
 *.jar
 *.war
 *.ear
+*.iml
 /target/
 /nbactions-Cutter.xml
 /nbactions-CLI.xml
