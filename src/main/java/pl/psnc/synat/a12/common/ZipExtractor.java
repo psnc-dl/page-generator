@@ -25,7 +25,9 @@ public class ZipExtractor {
                 Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>) zipfile.entries();
 
                 if (entries.hasMoreElements() && !dest.isDirectory()) {
-                    dest.mkdir();
+                    if(!dest.isDirectory()){
+                        dest.mkdir();
+                    }
                 }
 
                 while (entries.hasMoreElements()) {

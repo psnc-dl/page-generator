@@ -103,8 +103,10 @@ public final class CLIUtils {
     
     public static void saveZip(String output, File pageFile, File boxFile) throws IOException {
         ZipOutputFile result = new ZipOutputFile(output);
-        result.addFile(pageFile);
-        result.addFile(boxFile);
+        if(pageFile.exists())
+            result.addFile(pageFile);
+        if(boxFile.exists())
+            result.addFile(boxFile);
         result.close();
     }
 }
