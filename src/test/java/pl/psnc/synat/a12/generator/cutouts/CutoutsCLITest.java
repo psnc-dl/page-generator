@@ -3,7 +3,6 @@ package pl.psnc.synat.a12.generator.cutouts;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Rule;
@@ -25,7 +24,6 @@ public class CutoutsCLITest {
     @Test
     public void shouldConvertCutoutsToBoxAndImage() throws Exception {
         String outputFileName = "test_output";
-        Paths.get("src\\test\\resources\\");
         File expectedBoxFile = new File("src\\test\\resources\\" + outputFileName+ "-box");
         File expectedImgFile = new File("src\\test\\resources\\" + outputFileName);
 
