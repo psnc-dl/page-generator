@@ -4,7 +4,6 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import org.apache.commons.io.FileUtils;
 import pl.psnc.synat.a12.common.ZipExtractor;
 import pl.psnc.synat.a12.common.ZipOutputFile;
@@ -93,11 +92,11 @@ public final class CLIUtils {
         return tmpDir;
     }
     
-    public static String getImgName(Path outputPath, String tmpDirName){
-        return outputPath.getParent() + "\\" + tmpDirName + "\\" + outputPath.getFileName();
+    public static String getImgName(File outputPath, String tmpDirName){
+        return outputPath.getParent() + "\\" + tmpDirName + "\\" + outputPath.getName();
     }
     
-    public static String getBoxName(Path outputPath, String tmpDirName){
+    public static String getBoxName(File outputPath, String tmpDirName){
         return getImgName(outputPath, tmpDirName) + "-box";
     }
     
