@@ -93,7 +93,7 @@ public final class CLIUtils {
     }
     
     public static String getImgName(File outputPath, String tmpDirName){
-        return outputPath.getParent() + "\\" + tmpDirName + "\\" + outputPath.getName();
+        return outputPath.getParent() + File.separator + tmpDirName + File.separator + outputPath.getName();
     }
     
     public static String getBoxName(File outputPath, String tmpDirName){
