@@ -4,16 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-
-import pl.psnc.synat.a12.common.ZipExtractor;
-import pl.psnc.synat.a12.common.ZipOutputFile;
-
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import com.google.common.base.Strings;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import pl.psnc.synat.a12.aletheia.CLIUtils;
 
 /**
@@ -37,7 +30,7 @@ public class CLI {
             generator.getText().printText();
         }
 
-        Path outputPath = Paths.get(cliArgs.output);
+        File outputPath = new File(cliArgs.output);
         File tmpDir = CLIUtils.createTmpDir(cliArgs.output);
         String tmpDirName = tmpDir.getName();
         String boxFilePath = CLIUtils.getBoxName(outputPath, tmpDirName);

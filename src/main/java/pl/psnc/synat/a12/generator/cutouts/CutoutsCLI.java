@@ -9,8 +9,6 @@ import pl.psnc.synat.a12.generator.Page;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import pl.psnc.synat.a12.aletheia.CLIUtils;
@@ -44,7 +42,7 @@ public class CutoutsCLI {
             int height = generator.getFileHeight();
             int width = generator.getFileWidth();
 
-            Path outputPath = Paths.get(cliArgs.output);
+            File outputPath = new File(cliArgs.output);
             File tmpDir = CLIUtils.createTmpDir(cliArgs.output);
             String tmpDirName =  tmpDir.getName();
             String boxFilePath = CLIUtils.getBoxName(outputPath, tmpDirName);
