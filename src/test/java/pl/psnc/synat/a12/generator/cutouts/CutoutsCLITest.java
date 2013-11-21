@@ -24,10 +24,17 @@ public class CutoutsCLITest {
     @Test
     public void shouldConvertCutoutsToBoxAndImage() throws Exception {
         String outputFileName = "test_output";
-        File expectedBoxFile = new File("src\\test\\resources\\" + outputFileName+ "-box");
-        File expectedImgFile = new File("src\\test\\resources\\" + outputFileName);
+        
+        String expectedFilePath = new StringBuilder().append("src")
+                .append(File.separator).append("test").append(File.separator)
+                .append("resources").append(File.separator)
+                .append(outputFileName).toString();
+        File expectedBoxFile = new File(expectedFilePath+"-box");
+        File expectedImgFile = new File(expectedFilePath);
 
-        String inputDir ="src\\test\\resources\\input.zip";
+        String inputDir =new StringBuilder().append("src").append(File.separator)
+                .append("test").append(File.separator).append("resources")
+                .append(File.separator).append("input.zip").toString();
         File outputFile = outputTmpDir.newFile(outputFileName);
         String[] args = {"--input", inputDir, "--output", outputFile.getAbsolutePath()};
 
