@@ -6,11 +6,13 @@ import javax.xml.bind.JAXBException;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import org.apache.log4j.Logger;
 
 public class XmlToTxt {
 
+    private final static Logger logger = Logger.getLogger(XmlToTxt.class);
+   
     private AletheiaArguments arguments = new AletheiaArguments();
-
 
     private void run()
             throws JAXBException, IOException {
@@ -34,7 +36,7 @@ public class XmlToTxt {
             printLines(region, sb);
         }
         printLines(reader.getSignature(), sb);
-        System.out.println(sb.toString());
+        logger.info(sb.toString());
     }
 
 

@@ -23,6 +23,7 @@ import pl.psnc.synat.cutter.image.ImageProcesor;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import org.apache.log4j.Logger;
 
 public class Cutter {
 
@@ -31,6 +32,8 @@ public class Cutter {
     private static final String TOKEN_ITALIC = "_italic";
 
     private static final Object TOKEN_NOISE = "_noise";
+    
+    private static final Logger logger = Logger.getLogger(Cutter.class);
     
     public class CutterArguments extends AletheiaArguments implements Command {
 
@@ -83,8 +86,8 @@ public class Cutter {
     	outputZipArchive = new ZipOutputFile(arguments.getOutputFilename());
 
         arguments.readNoiseList();
-        System.out.println("Noise words: " + arguments.getNoiseWords());
-        System.out.println("Tabu types: " + arguments.tabuTypes);
+        logger.info("Noise words: " + arguments.getNoiseWords());
+        logger.info("Tabu types: " + arguments.tabuTypes);
 
         PageXmlReader reader = new PageXmlReader(arguments.inputXmlFilename);
         reader.read(arguments.getNoiseWords(), arguments.tabuTypes);
@@ -104,7 +107,7 @@ public class Cutter {
             Glyph glyph = iterator.next();
 
             if (counter % 100 == 0)
-                System.out.println("Processing: " + counter + " of " + reader.glyphsCount());
+                logger.info("Processing: " + counter + " of " + reader.glyphsCount());
 
             counter++;
             BoundingBox box = new BoundingBox(glyph.xCoord(), glyph.yCoord());

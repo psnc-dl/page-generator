@@ -3,8 +3,11 @@ package pl.psnc.synat.a12.generator;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 public final class StatUtils {
+    
+    private final static Logger logger = Logger.getLogger(StatUtils.class);
 
     private StatUtils() {
         // empty
@@ -69,7 +72,7 @@ public final class StatUtils {
         nums[7] = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
         for (List<Integer> list : nums) {
-            System.out.println(list + ": " + median(list));
+            logger.info(list + ": " + median(list));
         }
     }
 }

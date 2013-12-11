@@ -5,8 +5,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 public class TextGenerator {
+    
+    private final static Logger logger = Logger.getLogger(TextGenerator.class);
 
     private final static List<Character> punctuations = Arrays.asList(new Character[] { ',', '.', '?', '!', ':' });
 
@@ -31,7 +34,7 @@ public class TextGenerator {
 
     public void printText() {
         for (BoxLine line : lines) {
-            System.out.println(buildLine(line).toString());
+            logger.info(buildLine(line).toString());
         }
 
         if (isVerbose()) {

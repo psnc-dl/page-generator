@@ -8,8 +8,12 @@ import java.nio.charset.Charset;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import org.apache.log4j.Logger;
+import pl.psnc.synat.a12.aletheia.XmlToTxt;
 
 public class Diff {
+
+    private final static Logger logger = Logger.getLogger(XmlToTxt.class);
 
     private String base;
     private String modified;
@@ -44,12 +48,13 @@ public class Diff {
 
 
     private void printDistance() {
-        System.out.println("distance:\t" + diff.getDistance());
+        logger.info("distance:\t" + diff.getDistance());
     }
 
 
     private void printDiff(DiffArgs diffArgs) {
         VT100ColorFormatter formatter = new VT100ColorFormatter();
+        StringBuilder message = new StringBuilder();
 
         if (diffArgs.isDetailsSet()) {
             formatter.emphasize(diffArgs.isSubSet(), diffArgs.isInsSet(), diffArgs.isDelSet());
@@ -58,24 +63,25 @@ public class Diff {
         diff.getOperators(formatter);
 
         if (diffArgs.isDetailsSet()) {
-            System.out.print(diff.getStatistics().getDistribution(diffArgs.isSubSet(), diffArgs.isInsSet(),
+            message.append(diff.getStatistics().getDistribution(diffArgs.isSubSet(), diffArgs.isInsSet(),
                 diffArgs.isDelSet()));
         }
 
         if (diffArgs.isVisualSet()) {
-            System.out.print(formatter.getOperators().toString());
+            message.append(formatter.getOperators().toString());
         }
 
         if (diffArgs.isStatsSet()) {
             if (diffArgs.isOnelineSet()) {
-                System.out.print(diff.getStatistics().asOneliner());
+                message.append(diff.getStatistics().asOneliner());
             } else {
-                System.out.print(diff.getStatistics().toString());
+                message.append(diff.getStatistics().toString());
             }
         } else {
             printDistance();
         }
 
+        logger.info(message.toString());
     }
 
 
@@ -96,7 +102,7 @@ public class Diff {
             commander.parse(args);
             checkParameters(diffArgs, commander);
         } catch (ParameterException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             commander.usage();
             return;
         }

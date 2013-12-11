@@ -16,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import org.apache.log4j.Logger;
 
 import pl.psnc.synat.a12.generator.LetterBox;
 import pl.psnc.synat.a12.generator.custom.LettersProvider;
@@ -23,11 +24,11 @@ import pl.psnc.synat.a12.generator.custom.LettersProvider;
 public class MainForm extends JFrame {
 
     private static final long serialVersionUID = 6547317070325142501L;
+    private final static Logger logger = Logger.getLogger(MainForm.class);
     private Map<Character, Integer> offsets = new HashMap<Character, Integer>();
     private List<GlyphPane> glyphPanes = new LinkedList<GlyphPane>();
     private LettersProvider alph;
     private Container mainPane;
-
 
     public void init() {
         setSize(800, 600);
@@ -39,7 +40,6 @@ public class MainForm extends JFrame {
         ActionsController.getInstance().setWindow(this);
         mainPane = getContentPane();
     }
-
 
     private void showGlyphs() {
         if (alph != null) {
@@ -58,13 +58,12 @@ public class MainForm extends JFrame {
         }
     }
 
-
     private int getOffset(char c) {
-        if (offsets != null && offsets.containsKey(c))
+        if (offsets != null && offsets.containsKey(c)) {
             return offsets.get(c);
+        }
         return 0;
     }
-
 
     private void createMenuBar() {
         ActionsController controller = ActionsController.getInstance();
@@ -88,14 +87,12 @@ public class MainForm extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
-
     private JMenu createMenu(JMenuBar menuBar, String name, int key) {
         JMenu fileMenu = new JMenu(name);
         fileMenu.setMnemonic(key);
         menuBar.add(fileMenu);
         return fileMenu;
     }
-
 
     private JMenuItem createItem(JMenu menu, String name) {
         JMenuItem menuItem;
@@ -104,7 +101,6 @@ public class MainForm extends JFrame {
         return menuItem;
     }
 
-
     private JCheckBoxMenuItem createCheckbox(JMenu menu, String name) {
         JCheckBoxMenuItem menuItem;
         menuItem = new JCheckBoxMenuItem(name);
@@ -112,18 +108,15 @@ public class MainForm extends JFrame {
         return menuItem;
     }
 
-
     public void setAlphabet(LettersProvider alphabet) {
         alph = alphabet;
         showGlyphs();
-        System.out.println("glyphs shown");
+        logger.info("glyphs shown");
     }
-
 
     public void setOffsets(Map<Character, Integer> offsets) {
         this.offsets = offsets;
     }
-
 
     public Map<Character, Integer> getOffsets() {
         for (GlyphPane pane : glyphPanes) {
