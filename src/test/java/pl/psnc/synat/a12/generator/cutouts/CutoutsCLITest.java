@@ -23,6 +23,7 @@ public class CutoutsCLITest {
      */
     @Test
     public void shouldConvertCutoutsToBoxAndImage() throws Exception {
+        //given
         String outputFileName = "test_output";
         
         String expectedFilePath = new StringBuilder().append("src")
@@ -38,8 +39,10 @@ public class CutoutsCLITest {
         File outputFile = outputTmpDir.newFile(outputFileName);
         String[] args = {"--input", inputDir, "--output", outputFile.getAbsolutePath()};
 
+        //when
         CutoutsCLI.main(args);
         
+        //then
         ZipExtractor extractor = new ZipExtractor();
         File extractedFile =outputTmpDir.newFolder("result"); 
         extractor.extract(outputFile, extractedFile);
