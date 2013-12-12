@@ -18,7 +18,9 @@ To generate images you need to:
 ```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.generator.CLI --input zipWithImages.zip -w imageWidth -h imageHeight --output output.zip```
 
 As a result of second step you will receive clean training image and box file which might be used to fed Tesseract 
-training process. Full list of available features for both tools is listed after parameterless invocation.
+training process. 
+
+Full list of available features for both tools is listed after invocation of tool without any parameters.
 
 ## Running page-generator with Cutouts output
 
@@ -29,9 +31,9 @@ information whether glyph is noised, coordinates of glyph in the original image.
 
 Page generator can produce cleaned images based on the output from Cutouts, in order to do so, 
 you need to invoke it:
-```java -cp $PAGE_GENERATOR_JAR .psnc.synat.a12.generator.cutouts.CutoutsCLI ```
+```java -cp $PAGE_GENERATOR_JAR .psnc.synat.a12.generator.cutouts.CutoutsCLI --input zipWithImages.zip -w imageWidth -h imageHeight --output output.zip```
 
-It will result in..
+Full list of available features will be listed after invocation of tool without any parameters
 
 ## TODO
 
