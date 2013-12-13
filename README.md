@@ -4,12 +4,13 @@ In order to build page-generator from scratch you will need Apache Maven, go to 
 project folder (where the pom.xml is) and invoke: 
 ```mvn assembly:assembly```
 As a result you will get a executable jar with all dependencies stored in ```./target/``` it should be 
-named like ```page-generator-0.0.1-SNAPSHOT-jar-with-dependencies.jar```.
+named like ```page-generator-jar-with-dependencies.jar```.
 
 ## Running page-generator with PAGE XML
 
 Preparation of training data consists of two steps: preparation of glyphs (cutting) and 
-creation of training images (generation of images). 
+creation of training images (generation of images). In the examples below ```$PAGE_GENERATOR_JAR``` 
+is instead of real jar name.
 
 In order to prepare glyphs, you need to invoke:
 ```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.aletheia.Cutter --image imageName.png --xml xmlName.xml --output ./zipWithImages.zip```
