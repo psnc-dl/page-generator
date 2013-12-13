@@ -37,15 +37,28 @@ Full list of available features will be listed after invocation of tool without 
 
 ## TODO
 
-* check licenses of used dependencies 
-* check with Java 7 
 * check with Tesseract 3.0.1
 * check with Tesseract 3.0.2
-* add disclaimers in code 
 
 ## Done
+* check with Java 7 
 * get rid of System.outs/err use logger (include log4j.properties) 
 * make project buildable
 * dependency review
 * update changes required for workflow launch
 * describe building process 
+* check licenses of used dependencies 
+
+
+## Acknowledgements
+The tool is developed by [Digital Libraries Team](http://dl.psnc.pl/) of 
+[Poznań Supercomputing and Networking Center](http://www.man.poznan.pl/).
+
+This project was initiated and partially funded as a part of the 
+[Succeed](succeed-project.eu) project, funded by the European Union.
+
+## Licence
+Copyright (c) 2013 Poznań Supercomputing and Networking Center  
+Licensed under the [EUPL, Version 1.1](https://joinup.ec.europa.eu/software/page/eupl/licence-eupl). 
+
+"Compatible Licences" according to article 5 EUPL are: GNU General Public License (GNU GPL) v. 2, Open Software License (OSL) v. 2.1, v. 3.0, Common Public License v. 1.0, Eclipse Public License v. 1.0, Cecill v. 2.0.
