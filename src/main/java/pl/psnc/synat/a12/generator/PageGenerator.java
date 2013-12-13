@@ -1,19 +1,20 @@
 package pl.psnc.synat.a12.generator;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
+import org.apache.log4j.Logger;
 
 public class PageGenerator extends AbstractGenerator<LineEstimate> {
 
+    private final static Logger logger = Logger.getLogger(PageGenerator.class);
+
     protected File store;
-    protected  File[] images;
-    protected  int matchesCount;
+    protected File[] images;
+    protected int matchesCount;
     protected int multiMatched;
     protected Double spaceEmRatio;
     protected boolean overlap = false;
-
 
     public PageGenerator(String path) {
         super(new LinkedList<LineEstimate>());
@@ -21,42 +22,34 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
         images = store.listFiles(ImageSelector.FINAL);
     }
 
-
     @Override
     public void init() throws Exception {
         for (File file : images) {
-            try {
-                LetterBox box = new LetterBox(file);
-                addMatch(box);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            LetterBox box = new LetterBox(file);
+            addMatch(box);
         }
         adjustLines();
     }
 
-
     public void printStats() {
-        System.err.println("TOTAL: " + multiMatched + " of " + images.length);
-        System.err.println("Estimated Matching Accuracy: "
+        logger.debug("TOTAL: " + multiMatched + " of " + images.length);
+        logger.debug("Estimated Matching Accuracy: "
                 + (100 - (double) multiMatched / (double) images.length * 100) + "%");
     }
-
 
     public TextGenerator getText() {
         TextGenerator text = new TextGenerator(lines);
         text.setVerbose(verbose);
 
-        if (spaceEmRatio != null)
+        if (spaceEmRatio != null) {
             text.setSpaceEmRatio(spaceEmRatio);
+        }
         return text;
     }
-
 
     public void setEmRatio(Double emRatio) {
         spaceEmRatio = emRatio;
     }
-
 
     protected void adjustLines() {
         Collections.sort(lines, new TopDownOrder());
@@ -69,7 +62,6 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
             }
         }
     }
-
 
     protected void addMatch(LetterBox box) {
         matchesCount = 0;
@@ -86,11 +78,10 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
             multiMatched++;
 
             if (isVerbose()) {
-                System.err.println(box.getGlyph() + ": " + matchesCount);
+                logger.error(box.getGlyph() + ": " + matchesCount);
             }
         }
     }
-
 
     private LineEstimate findMatch(LetterBox box) {
         LineEstimate matchingLine = null;
@@ -110,16 +101,13 @@ public class PageGenerator extends AbstractGenerator<LineEstimate> {
         return matchingLine;
     }
 
-
     public void setOverlap(boolean overlap) {
         this.overlap = overlap;
     }
 
-
     public boolean isOverlap() {
         return overlap;
     }
-
 
     public File getStore() {
         return store;

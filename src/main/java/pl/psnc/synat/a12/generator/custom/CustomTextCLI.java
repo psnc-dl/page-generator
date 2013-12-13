@@ -15,8 +15,11 @@ import pl.psnc.synat.a12.generator.Page;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import org.apache.log4j.Logger;
 
 public class CustomTextCLI {
+    
+    private final static Logger logger = Logger.getLogger(CustomTextCLI.class);
 
     private int margin = 50;
     private CommandLineArgs args;
@@ -60,7 +63,7 @@ public class CustomTextCLI {
     private void loadText(String path)
             throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String line;
 
         try {
@@ -145,7 +148,7 @@ public class CustomTextCLI {
             commander.parse(args);
             checkParameters(cliArgs, commander);
         } catch (ParameterException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             commander.usage();
             return null;
         }

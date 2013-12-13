@@ -10,8 +10,11 @@ import java.util.List;
 import pl.psnc.synat.a12.aletheia.CLIUtils.Command;
 
 import com.beust.jcommander.Parameter;
+import org.apache.log4j.Logger;
 
 public class AletheiaArguments implements Command {
+    
+    private static final Logger logger = Logger.getLogger(AletheiaArguments.class);
 
     @Parameter(names = "--xml", description = "file name of a page xml input", required = true)
     protected String inputXmlFilename;
@@ -56,7 +59,7 @@ public class AletheiaArguments implements Command {
         File tabu = new File(noiseFilename);
 
         if (!tabu.isFile()) {
-            System.err.println("Missing tabu-noise file " + noiseFilename);
+            logger.error("Missing tabu-noise file " + noiseFilename);
             return;
         }
         BufferedReader reader = new BufferedReader(new FileReader(tabu));

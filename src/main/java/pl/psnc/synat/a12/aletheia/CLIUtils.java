@@ -5,15 +5,17 @@ import com.beust.jcommander.ParameterException;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import pl.psnc.synat.a12.common.ZipExtractor;
 import pl.psnc.synat.a12.common.ZipOutputFile;
 
 public final class CLIUtils {
+    
+    private final static Logger logger = Logger.getLogger(CLIUtils.class);
 
     public interface Command {
 
         public String name();
-
 
         public boolean isHelp();
     }
@@ -32,7 +34,7 @@ public final class CLIUtils {
             String desc = engine.getCommandDescription(commandName);
             sb.append(" (\"").append(desc).append("\")");
         }
-        System.err.println(sb.toString());
+        logger.error(sb.toString());
         engine.usage();
     }
 
