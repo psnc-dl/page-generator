@@ -89,7 +89,12 @@ public class CutoutsPageGenerator extends PageGenerator {
         try {
             for (BoxLine line : lines) {
                 for (LetterBox box : line.getBoxes()) {
-                    writer.write(box);
+                    int y1 = height - box.getY2();
+                    int x1 = box.getX1();
+                    int y2 = height - box.getY1();
+                    int x2 = box.getX2();                    
+                    LetterBox translatedLetterBox = new LetterBox(box, x1, y1, x2, y2);
+                    writer.write(translatedLetterBox);
                 }
             }
         } finally {

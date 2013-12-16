@@ -61,6 +61,18 @@ public class LetterBox extends BoundingBox implements Sortable {
         
     }
     
+    public LetterBox(LetterBox box, int newX1, int newY1, int newX2, int newY2) {
+        italic = box.italic;
+        gothic = box.gothic;
+        noised = box.noised;
+        image = box.image;
+        x1 = newX1;
+        y1 = newY1;
+        x2 = newX2;
+        y2 = newY2;
+        glyph = box.glyph;
+    }
+    
     public LetterBox(LetterBox box, int newX1, int newY2) {
         italic = box.italic;
         gothic = box.gothic;
@@ -72,7 +84,6 @@ public class LetterBox extends BoundingBox implements Sortable {
         y1 = newY2 - box.getHeight();
         glyph = box.glyph;
     }
-
 
     public char getGlyph() {
         return glyph;
