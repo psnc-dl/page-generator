@@ -43,8 +43,8 @@ public class CLITest {
         assertThat(filesInResultArchive.length, is(2));
         
         String expectedResultFileName = outputFileName;
-        assertThat(filesInResultArchive[0].getName(), is(expectedResultFileName));
-        assertThat(filesInResultArchive[1].getName(), is(expectedResultFileName+"-box"));
+        assertThat(filesInResultArchive[0].getName(), is(expectedResultFileName+".box"));
+        assertThat(filesInResultArchive[1].getName(), is(expectedResultFileName+".png"));
     }
 
 }

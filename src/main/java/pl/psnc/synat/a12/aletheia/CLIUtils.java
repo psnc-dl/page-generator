@@ -8,9 +8,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import pl.psnc.synat.a12.common.ZipExtractor;
 import pl.psnc.synat.a12.common.ZipOutputFile;
+import pl.psnc.synat.a12.generator.Page;
 
 public final class CLIUtils {
-    
+
     private final static Logger logger = Logger.getLogger(CLIUtils.class);
 
     public interface Command {
@@ -20,11 +21,9 @@ public final class CLIUtils {
         public boolean isHelp();
     }
 
-
     private CLIUtils() {
         // empty
     }
-
 
     public static void handleParameterException(JCommander engine, ParameterException e) {
         StringBuilder sb = new StringBuilder(e.getMessage());
@@ -38,7 +37,6 @@ public final class CLIUtils {
         engine.usage();
     }
 
-
     public static JCommander createEngine(String name, Command main, Command... commands) {
         JCommander engine = new JCommander(main);
 
@@ -50,15 +48,14 @@ public final class CLIUtils {
         return engine;
     }
 
-
     public static void checkHelp(JCommander engine, Command arguments) {
         if (arguments.isHelp()) {
             engine.usage();
             System.exit(0);
         }
     }
-    
-     public static void deleteFiles(File... files) throws IOException {
+
+    public static void deleteFiles(File... files) throws IOException {
         for (File file : files) {
             if (file != null) {
                 if (file.isDirectory()) {
@@ -69,7 +66,7 @@ public final class CLIUtils {
             }
         }
     }
-     
+
     public static String extractParams(String archive) {
         File archiveFile = new File(archive);
         File output = new File(prepareOutputDirName(archiveFile));
@@ -78,36 +75,50 @@ public final class CLIUtils {
         return output.getPath();
     }
 
-
     private static String prepareOutputDirName(File archive) {
         StringBuilder sbResult = new StringBuilder(FileUtils.getTempDirectoryPath());
         sbResult.append(File.separator);
         sbResult.append(archive.getName().replace('.', '_'));
         return sbResult.toString();
     }
-    
-    
-    public static File createTmpDir(String output){
+
+    public static File createTmpDir(String output) {
         String outputDir = output + "_results";
         File tmpDir = new File(outputDir);
         tmpDir.mkdir();
         return tmpDir;
     }
-    
-    public static String getImgName(File outputPath, String tmpDirName){
-        return outputPath.getParent() + File.separator + tmpDirName + File.separator + outputPath.getName();
+
+    public static String getImgName(File outputPath, String tmpDirName) {
+        StringBuilder sb = getBaseNameForOutputFiles(outputPath, tmpDirName);
+        String result = sb.toString();
+        if (!result.endsWith(Page.PAGE_IMG_FILE_EXTENSION)) {
+            result = result + "." + Page.PAGE_IMG_FILE_EXTENSION;
+        }
+        return result;
     }
-    
-    public static String getBoxName(File outputPath, String tmpDirName){
-        return getImgName(outputPath, tmpDirName) + "-box";
+
+    private static StringBuilder getBaseNameForOutputFiles(File outputPath, String tmpDirName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(outputPath.getParent()).append(File.separator)
+                .append(tmpDirName).append(File.separator)
+                .append(File.separator).append(outputPath.getName());
+        return sb;
     }
-    
+
+    public static String getBoxName(File outputPath, String tmpDirName) {
+        StringBuilder sb = getBaseNameForOutputFiles(outputPath, tmpDirName);
+        return sb.toString() + ".box";
+    }
+
     public static void saveZip(String output, File pageFile, File boxFile) throws IOException {
         ZipOutputFile result = new ZipOutputFile(output);
-        if(pageFile.exists())
+        if (pageFile.exists()) {
             result.addFile(pageFile);
-        if(boxFile.exists())
+        }
+        if (boxFile.exists()) {
             result.addFile(boxFile);
+        }
         result.close();
     }
 }

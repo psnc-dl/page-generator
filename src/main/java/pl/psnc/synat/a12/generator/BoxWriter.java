@@ -1,8 +1,11 @@
 package pl.psnc.synat.a12.generator;
 
 import java.io.*;
+import org.apache.log4j.Logger;
 
 public class BoxWriter {
+    
+    private final static Logger logger = Logger.getLogger(BoxWriter.class);
 
     protected final BufferedWriter writer;
     protected boolean next;
@@ -12,6 +15,11 @@ public class BoxWriter {
 
     public BoxWriter(String filename)
             throws FileNotFoundException {
+
+        if (!filename.endsWith(".box")) {
+            filename = filename + ".box";
+        }
+        
         file = new File(filename);
         OutputStream output = new FileOutputStream(file);
         this.writer = new BufferedWriter(new OutputStreamWriter(output));
@@ -56,7 +64,7 @@ public class BoxWriter {
         try {
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Exception while closing box file",e);
         }
     }
 

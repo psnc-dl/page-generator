@@ -16,9 +16,9 @@ In order to prepare glyphs, you need to invoke:
 ```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.aletheia.Cutter --image imageName.png --xml xmlName.xml --output ./zipWithImages.zip```
 
 To generate images you need to:
-```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.generator.CLI --input zipWithImages.zip -w imageWidth -h imageHeight --output output.zip``
+```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.generator.CLI --input zipWithImages.zip -w imageWidth -h imageHeight --output ./output.zip```
 
-As a result of second step you will receive clean training image and box file which might be used to fed Tesseract 
+As a result of second step you will get zip archive with cleaned training image and box file which might be used to fed Tesseract 
 training process. 
 
 Full list of available features for both tools is listed after invocation of tool without any parameters.
@@ -40,6 +40,7 @@ Full list of available features will be listed after invocation of tool without 
 
 * check with Tesseract 3.0.1
 * check with Tesseract 3.0.2
+* describe LetterBrowser
 
 ## Done
 * check with Java 7 

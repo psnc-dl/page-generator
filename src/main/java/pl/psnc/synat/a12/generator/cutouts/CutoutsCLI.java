@@ -15,9 +15,6 @@ import pl.psnc.synat.a12.aletheia.CLIUtils;
 import pl.psnc.synat.a12.generator.BaseLinesFile;
 import pl.psnc.synat.a12.generator.CommonCliArgs;
 
-/**
- *
- */
 public class CutoutsCLI {
     
     private static final Logger logger = Logger.getLogger(CutoutsCLI.class);

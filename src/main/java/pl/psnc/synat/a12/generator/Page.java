@@ -11,12 +11,13 @@ import javax.imageio.ImageIO;
 
 public class Page extends BoxFilter {
 
+    public final static String PAGE_IMG_FILE_EXTENSION = "png";
+    
     final private List<? extends BoxLine> lines;
 
     private BufferedImage page;
 
     private boolean showBaselines = false;
-
 
     public Page(List<? extends BoxLine> lines, boolean skipItalic, boolean skipNoise, boolean skipGothic) {
         this.lines = lines;
@@ -25,11 +26,9 @@ public class Page extends BoxFilter {
         this.setSkipGothic(skipGothic);
     }
 
-
     public Page(List<? extends BoxLine> lines2) {
         this(lines2, false, false, false);
     }
-
 
     public void draw(int width, int height) {
         page = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -41,7 +40,7 @@ public class Page extends BoxFilter {
         Graphics graphics = page.getGraphics();
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, width, height);
-        
+
         for (BoxLine line : lines) {
 
             for (LetterBox box : line.getBoxes()) {
@@ -59,17 +58,22 @@ public class Page extends BoxFilter {
         }
     }
 
-
     public void save(File file)
             throws IOException {
-        ImageIO.write(page, "png", file);
+        
+        final String fileExtension = PAGE_IMG_FILE_EXTENSION;
+                
+        String filePath = file.getAbsolutePath();
+        if (!filePath.endsWith(fileExtension)) {
+            file = new File(filePath + "." + fileExtension);
+        }
+        
+        ImageIO.write(page, fileExtension, file);
     }
-
 
     public void setShowBaselines(boolean showBaselines) {
         this.showBaselines = showBaselines;
     }
-
 
     public boolean isShowBaselines() {
         return showBaselines;

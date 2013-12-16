@@ -39,8 +39,8 @@ public class CutoutsCLITest {
         extractArchive(outputFile, extractedResultArchiveFolder);
 
         assertEquals(extractedResultArchiveFolder.listFiles().length, 2);
-        checkResultCleanedImage(new File(extractedResultArchiveFolder, outputFileName));
-        checkResultBoxFile(new File(extractedResultArchiveFolder, outputFileName + "-box"));
+        checkResultCleanedImage(new File(extractedResultArchiveFolder, outputFileName+".png"));
+        checkResultBoxFile(new File(extractedResultArchiveFolder, outputFileName + ".box"));
 
     }
 
@@ -51,13 +51,13 @@ public class CutoutsCLITest {
 
     private void checkResultBoxFile(File boxFile) {
         assertThat(boxFile.exists(), is(true));
-        File expectedBox = new File(getInputDataPath("test_output-box"));
+        File expectedBox = new File(getInputDataPath("test_output.box"));
         compareFilesMD5(boxFile, expectedBox);
     }
 
     private void checkResultCleanedImage(File cleanedImageFile) {
         assertThat(cleanedImageFile.exists(), is(true));
-        File expectedCleanedImage = new File(getInputDataPath("test_output"));
+        File expectedCleanedImage = new File(getInputDataPath("test_output.png"));
         compareFilesMD5(cleanedImageFile, expectedCleanedImage);
     }
 
