@@ -9,18 +9,21 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import javax.xml.bind.JAXBException;
+import org.apache.log4j.Logger;
 
 import pl.psnc.synat.a12.generator.*;
 import pl.psnc.synat.a12.model.TesseractBoxWriter;
 
 public class CutoutsPageGenerator extends PageGenerator {
+    
+    private final static Logger logger = Logger.getLogger(CutoutsPageGenerator.class);
 
-    private File[] metadataFiles;
-    private Short fileHeight;
-    private Short fileWidth;
+    private final File[] metadataFiles;
+    private int fileHeight = -1;
+    private int fileWidth = -1;
+    private int noOfInvalidLetterBoxes = 0;    
     private HashMap<String, File> imageList = new HashMap<String, File>();
     private HashMap<String, File> metadataList = new HashMap<String, File>();
-
 
     public CutoutsPageGenerator(String path) {
         super(path);
@@ -49,11 +52,11 @@ public class CutoutsPageGenerator extends PageGenerator {
         }
     }
 
-
     /**
-     * Extracts file width, heigh, image coordinates from xml. 
+     * Extracts file width, heigh, image coordinates from xml.
+     *
      * @throws JAXBException
-     * @throws IOException 
+     * @throws IOException
      */
     @Override
     public void init()
@@ -64,10 +67,19 @@ public class CutoutsPageGenerator extends PageGenerator {
             File image = imageList.get(key);
             CutoutsXmlReader reader = new CutoutsXmlReader(metadataFile.getPath());
             pl.psnc.synat.a12.generator.utils.jaxb.LetterBox cutoutsBox = reader.read();
-            if (fileHeight == null) {
+
+            if (isNotValidLetterBox(cutoutsBox)) {
+                logger.error(metadataFile+" contains wrong coordinates, skipping");
+                noOfInvalidLetterBoxes++;
+                continue;
+            }            
+            
+            //extract to separate method
+            if (fileHeight == -1) {
                 fileHeight = cutoutsBox.getSize().getHeight();
             }
-            if (fileWidth == null) {
+
+            if (fileWidth == -1) {
                 fileWidth = cutoutsBox.getSize().getWidth();
             }
             int x1 = cutoutsBox.getBoundingBox().getCoordinate().get(0).getX();
@@ -80,13 +92,15 @@ public class CutoutsPageGenerator extends PageGenerator {
             addMatch(letterBox);
         }
         adjustLines();
-    }
 
+        logger.info("Found "+metadataFiles.length+" files, "+noOfInvalidLetterBoxes+" contained wrong coordinates");
+        
+    }
 
     @Override
     public File generateBoxFile(String boxFilename, int height)
             throws IOException {
-        
+
         TesseractBoxWriter writer = new TesseractBoxWriter(boxFilename, height);
         writer.setStoreFontType(showFontType);
 
@@ -103,14 +117,18 @@ public class CutoutsPageGenerator extends PageGenerator {
         return writer.getFile();
     }
 
-
-    public Short getFileHeight() {
+    public int getFileHeight() {
         return fileHeight;
     }
 
-
-    public Short getFileWidth() {
+    public int getFileWidth() {
         return fileWidth;
+    }
+
+    private boolean isNotValidLetterBox(pl.psnc.synat.a12.generator.utils.jaxb.LetterBox cutoutsBox) {        
+        int height = cutoutsBox.getSize().getHeight();
+        int y2 = cutoutsBox.getBoundingBox().getCoordinate().get(1).getY();     
+        return height < y2;       
     }
 
 }

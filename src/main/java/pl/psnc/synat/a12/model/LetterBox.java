@@ -22,7 +22,7 @@ public class LetterBox extends BoundingBox implements Sortable {
     private boolean noised;
     private boolean gothic;
 
-
+    //create a factory method
     public LetterBox(File file)
             throws IOException {
         String filename = file.getName();
@@ -46,6 +46,7 @@ public class LetterBox extends BoundingBox implements Sortable {
         glyph = (char) Integer.parseInt(data[3]);
     }
  
+    //create a factory method for this
     public LetterBox(File file, int x1, int y1, int x2, int y2, char glyph, String fontType, boolean noised)
             throws IOException {
 
@@ -59,18 +60,6 @@ public class LetterBox extends BoundingBox implements Sortable {
         this.y2 = y2;
         this.glyph = glyph;
         
-    }
-    
-    public LetterBox(LetterBox box, int newX1, int newY1, int newX2, int newY2) {
-        italic = box.italic;
-        gothic = box.gothic;
-        noised = box.noised;
-        image = box.image;
-        x1 = newX1;
-        y1 = newY1;
-        x2 = newX2;
-        y2 = newY2;
-        glyph = box.glyph;
     }
     
     public LetterBox(LetterBox box, int newX1, int newY2) {
