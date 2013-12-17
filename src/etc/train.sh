@@ -1,15 +1,4 @@
-# Path to Tesseract instalation
-FONTNAME=test
-
-# paths with tesseract's binaries and shared data
-TESS_BIN=/usr/bin
-TESS_SHARE=./
-
-# document specific settings
-LANG=pl
-
-###############################################
-NAME=$LANG.$FONTNAME.exp
+NAME=$1
 TIFNAME=.png
 
 echo "combined 0 0 0 0 1" >font_properties
@@ -22,8 +11,7 @@ do
 done
 
 cat *.tr >combined.tr
-mftraining -F font_properties -U unicharset -O $NAME.unicharset combined.tr 
-cntraining combined.tr
+mftraining -F font_properties -U unicharset -O $NAME.unicharset combined.tr && cntraining combined.tr || exit
 
 mv pffmtable $NAME.pffmtable
 mv normproto $NAME.normproto

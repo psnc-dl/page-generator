@@ -38,15 +38,16 @@ Full list of available features will be listed after invocation of tool without 
 
 ## TODO
 
-* check with Tesseract 3.0.1
+* change names of utility classes
+* add test for wrong cutouts input data
 * check with Tesseract 3.0.2
-* describe LetterBrowser
 * document usage of pl.psnc.synat.a12.evaluation.Diff
 * document usage of pl.psnc.synat.a12.generator.custom.CustomTextCLI
 * document usage of pl.psnc.synat.a12.gui.LettersBrowser
 * document usage of pl.psnc.synat.a12.aletheia.XmlToTxt
 
 ## Done
+* check with Tesseract 3.0.1
 * check with Java 7 
 * get rid of System.outs/err use logger (include log4j.properties) 
 * make project buildable
