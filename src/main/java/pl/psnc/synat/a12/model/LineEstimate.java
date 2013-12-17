@@ -68,10 +68,9 @@ public class LineEstimate implements BoxLine {
 
 
     public int getX1() {
-        return firstLetter.getY2();
-    }
-
-
+        return firstLetter.getX1();
+    }    
+    
     private LetterBox getClosestX(LetterBox box) {
         int min = Integer.MAX_VALUE;
         LetterBox closest = null;
