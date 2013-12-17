@@ -1,5 +1,9 @@
 package pl.psnc.synat.a12.generator;
 
+import pl.psnc.synat.a12.model.ImageSelector;
+import pl.psnc.synat.a12.model.LetterBox;
+import pl.psnc.synat.a12.model.LineEstimate;
+import pl.psnc.synat.a12.model.sort.TopDownOrder;
 import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;

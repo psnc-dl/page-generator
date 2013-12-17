@@ -9,16 +9,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pl.psnc.synat.a12.generator.BaseLinesFile;
-import pl.psnc.synat.a12.generator.ImageSelector;
-import pl.psnc.synat.a12.generator.Page;
+import pl.psnc.synat.a12.model.BaseLinesFile;
+import pl.psnc.synat.a12.model.ImageSelector;
+import pl.psnc.synat.a12.model.Page;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import org.apache.log4j.Logger;
 
 public class CustomTextCLI {
-    
+
     private final static Logger logger = Logger.getLogger(CustomTextCLI.class);
 
     private int margin = 50;
@@ -28,11 +28,22 @@ public class CustomTextCLI {
     private String textFull;
     private String[] textLines;
 
-
     public CustomTextCLI(CommandLineArgs cliArgs) {
         args = cliArgs;
     }
 
+    /**
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args)
+            throws IOException {
+        CommandLineArgs cliArgs = parseArguments(args);
+
+        if (cliArgs != null) {
+            new CustomTextCLI(cliArgs).run();
+        }
+    }
 
     private void run()
             throws IOException {
@@ -59,7 +70,6 @@ public class CustomTextCLI {
         page.save(new File(args.paths.get(2)));
     }
 
-
     private void loadText(String path)
             throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
@@ -77,7 +87,6 @@ public class CustomTextCLI {
         textFull = sb.toString();
     }
 
-
     private void loadTextLines(String path)
             throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
@@ -94,7 +103,6 @@ public class CustomTextCLI {
         textLines = lines.toArray(new String[0]);
     }
 
-
     private void computeMetrics() {
         if (args.isMarginSet()) {
             margin = args.margin;
@@ -102,7 +110,6 @@ public class CustomTextCLI {
         width = args.width;
         height = args.height;
     }
-
 
     private LettersProvider getAlphabet()
             throws IOException {
@@ -114,7 +121,6 @@ public class CustomTextCLI {
         return alphabet;
     }
 
-
     private void loadOffsets(CustomGenerator generator)
             throws IOException {
         if (args.isSetBaseLines()) {
@@ -123,21 +129,6 @@ public class CustomTextCLI {
             generator.setBaselineOffsets(offsets);
         }
     }
-
-
-    /**
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args)
-            throws IOException {
-        CommandLineArgs cliArgs = parseArguments(args);
-
-        if (cliArgs != null) {
-            new CustomTextCLI(cliArgs).run();
-        }
-    }
-
 
     private static CommandLineArgs parseArguments(String[] args) {
         CommandLineArgs cliArgs = new CommandLineArgs();
@@ -155,10 +146,10 @@ public class CustomTextCLI {
         return cliArgs;
     }
 
-
     private static void checkParameters(CommandLineArgs commandLineArgs, JCommander commander) {
-        if (commandLineArgs.paths.size() != 3)
+        if (commandLineArgs.paths.size() != 3) {
             throw new ParameterException("Main parameters are required (\"" + commander.getMainParameterDescription()
                     + "\")");
+        }
     }
 }

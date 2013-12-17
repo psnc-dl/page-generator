@@ -1,5 +1,9 @@
 package pl.psnc.synat.a12.generator;
 
+import pl.psnc.synat.a12.common.EmEstimate;
+import pl.psnc.synat.a12.model.LetterBox;
+import pl.psnc.synat.a12.model.BoxLine;
+import pl.psnc.synat.a12.model.LineEstimate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -40,7 +44,7 @@ public class TextGenerator {
         if (isVerbose()) {
             emCalculator.printInfo();
 
-            System.err.println("Added " + spacesCount + " spaces");
+            logger.error("Added " + spacesCount + " spaces");
         }
     }
 

@@ -1,5 +1,8 @@
 package pl.psnc.synat.a12.generator.cutouts;
 
+import pl.psnc.synat.a12.model.ImageSelector;
+import pl.psnc.synat.a12.model.LetterBox;
+import pl.psnc.synat.a12.model.BoxLine;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -8,6 +11,7 @@ import java.util.HashMap;
 import javax.xml.bind.JAXBException;
 
 import pl.psnc.synat.a12.generator.*;
+import pl.psnc.synat.a12.model.TesseractBoxWriter;
 
 public class CutoutsPageGenerator extends PageGenerator {
 
@@ -83,18 +87,13 @@ public class CutoutsPageGenerator extends PageGenerator {
     public File generateBoxFile(String boxFilename, int height)
             throws IOException {
         
-        BoxWriter writer = new BoxWriter(boxFilename);
+        TesseractBoxWriter writer = new TesseractBoxWriter(boxFilename, height);
         writer.setStoreFontType(showFontType);
 
         try {
             for (BoxLine line : lines) {
                 for (LetterBox box : line.getBoxes()) {
-                    int y1 = height - box.getY2();
-                    int x1 = box.getX1();
-                    int y2 = height - box.getY1();
-                    int x2 = box.getX2();                    
-                    LetterBox translatedLetterBox = new LetterBox(box, x1, y1, x2, y2);
-                    writer.write(translatedLetterBox);
+                    writer.write(box);
                 }
             }
         } finally {

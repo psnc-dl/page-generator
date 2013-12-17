@@ -1,4 +1,6 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.model;
+
+import pl.psnc.synat.a12.common.StatUtils;
 
 public class BoundingBox {
 

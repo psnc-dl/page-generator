@@ -1,4 +1,4 @@
-package pl.psnc.synat.a12.aletheia;
+package pl.psnc.synat.a12.aletheia.pagexml;
 
 import java.io.File;
 import java.util.ArrayList;

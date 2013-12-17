@@ -1,5 +1,7 @@
 package pl.psnc.synat.a12.aletheia;
 
+import pl.psnc.synat.a12.common.CLIUtils;
+import pl.psnc.synat.a12.aletheia.pagexml.PageXmlReader;
 import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
@@ -11,8 +13,23 @@ import org.apache.log4j.Logger;
 public class XmlToTxt {
 
     private final static Logger logger = Logger.getLogger(XmlToTxt.class);
-   
+
     private AletheiaArguments arguments = new AletheiaArguments();
+
+    public static void main(String[] args)
+            throws JAXBException, IOException {
+        XmlToTxt proc = new XmlToTxt();
+        JCommander engine = CLIUtils.createEngine(XmlToTxt.class.getName(), proc.arguments);
+
+        try {
+            engine.parse(args);
+            CLIUtils.checkHelp(engine, proc.arguments);
+        } catch (ParameterException e) {
+            CLIUtils.handleParameterException(engine, e);
+            System.exit(1);
+        }
+        proc.run();
+    }
 
     private void run()
             throws JAXBException, IOException {
@@ -22,7 +39,6 @@ public class XmlToTxt {
         reader.read(arguments.getNoiseWords(), arguments.getTabuTypes());
         print(reader);
     }
-
 
     private void print(PageXmlReader reader) {
         StringBuilder sb = new StringBuilder();
@@ -38,7 +54,6 @@ public class XmlToTxt {
         printLines(reader.getSignature(), sb);
         logger.info(sb.toString());
     }
-
 
     private void printLines(String[][] lines, StringBuilder sb) {
         if (lines == null) {
@@ -59,19 +74,4 @@ public class XmlToTxt {
         }
     }
 
-
-    public static void main(String[] args)
-            throws JAXBException, IOException {
-        XmlToTxt proc = new XmlToTxt();
-        JCommander engine = CLIUtils.createEngine(XmlToTxt.class.getName(), proc.arguments);
-
-        try {
-            engine.parse(args);
-            CLIUtils.checkHelp(engine, proc.arguments);
-        } catch (ParameterException e) {
-            CLIUtils.handleParameterException(engine, e);
-            System.exit(1);
-        }
-        proc.run();
-    }
 }

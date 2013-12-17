@@ -1,6 +1,7 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.model;
 
 import java.util.List;
+import pl.psnc.synat.a12.model.sort.Sortable;
 
 public interface BoxLine extends Sortable {
 

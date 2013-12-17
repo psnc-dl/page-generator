@@ -1,12 +1,12 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.model;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import pl.psnc.synat.a12.model.sort.Sortable;
 
 public class LetterBox extends BoundingBox implements Sortable {
 

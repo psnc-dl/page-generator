@@ -1,5 +1,7 @@
 package pl.psnc.synat.a12.generator;
 
+import pl.psnc.synat.a12.model.Page;
+import pl.psnc.synat.a12.model.BaseLinesFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -8,10 +10,13 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import com.google.common.base.Strings;
 import org.apache.log4j.Logger;
-import pl.psnc.synat.a12.aletheia.CLIUtils;
+import pl.psnc.synat.a12.common.CLIUtils;
+import pl.psnc.synat.a12.aletheia.Cutter;
 
 /**
- *
+ * This class is responsible for generation of training images and box
+ * files based on results of first step (implemented by {@link Cutter}) 
+ * in PAGE XML based Tesseract training.
  */
 public class CLI {
 
@@ -77,7 +82,7 @@ public class CLI {
 
         try {
             commander.parse(args);
-			// FIXME
+	    // FIXME
             // checkParameters(cliArgs, commander);
         } catch (ParameterException e) {
             logger.error(e.getMessage());

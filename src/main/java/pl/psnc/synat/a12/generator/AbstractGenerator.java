@@ -1,9 +1,14 @@
 package pl.psnc.synat.a12.generator;
 
+import pl.psnc.synat.a12.model.LetterBox;
+import pl.psnc.synat.a12.model.Page;
+import pl.psnc.synat.a12.model.BoxLine;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import pl.psnc.synat.a12.model.BaseLine;
+import pl.psnc.synat.a12.model.TesseractBoxWriter;
 
 public abstract class AbstractGenerator<T extends BoxLine> {
 

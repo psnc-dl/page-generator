@@ -19,8 +19,8 @@ import javax.media.jai.PlanarImage;
 
 import org.apache.log4j.Logger;
 
-import pl.psnc.synat.a12.generator.BoundingBox;
-import pl.psnc.synat.a12.generator.LetterBox;
+import pl.psnc.synat.a12.model.BoundingBox;
+import pl.psnc.synat.a12.model.LetterBox;
 
 public class ImageProcesor {
 

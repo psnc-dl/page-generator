@@ -1,4 +1,4 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.model.sort;
 
 public interface Sortable {
 

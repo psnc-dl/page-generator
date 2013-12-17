@@ -1,4 +1,4 @@
-package pl.psnc.synat.a12.generator.custom;
+package pl.psnc.synat.a12.common;
 
 import java.util.Collection;
 import java.util.HashMap;

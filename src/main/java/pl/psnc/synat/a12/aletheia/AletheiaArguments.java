@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.psnc.synat.a12.aletheia.CLIUtils.Command;
+import pl.psnc.synat.a12.common.CLIUtils.Command;
 
 import com.beust.jcommander.Parameter;
 import org.apache.log4j.Logger;
 
-public class AletheiaArguments implements Command {
+class AletheiaArguments implements Command {
     
     private static final Logger logger = Logger.getLogger(AletheiaArguments.class);
 

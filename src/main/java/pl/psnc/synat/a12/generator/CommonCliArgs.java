@@ -1,6 +1,7 @@
 
 package pl.psnc.synat.a12.generator;
 
+import pl.psnc.synat.a12.common.DoubleConverter;
 import com.beust.jcommander.Parameter;
 
 public class CommonCliArgs {

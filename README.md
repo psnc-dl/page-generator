@@ -41,6 +41,10 @@ Full list of available features will be listed after invocation of tool without 
 * check with Tesseract 3.0.1
 * check with Tesseract 3.0.2
 * describe LetterBrowser
+* document usage of pl.psnc.synat.a12.evaluation.Diff
+* document usage of pl.psnc.synat.a12.generator.custom.CustomTextCLI
+* document usage of pl.psnc.synat.a12.gui.LettersBrowser
+* document usage of pl.psnc.synat.a12.aletheia.XmlToTxt
 
 ## Done
 * check with Java 7 
@@ -57,6 +61,10 @@ The tool is developed by [Digital Libraries Team](http://dl.psnc.pl/) of
 [Poznań Supercomputing and Networking Center](http://www.man.poznan.pl/).
 
 This project was initiated and partially funded as a part of the 
+[Synat](www.synat.pl) project, funded by Polish National Centre 
+of Research and Development.
+
+This project was partially funded as a part of the 
 [Succeed](succeed-project.eu) project, funded by the European Union.
 
 ## Licence

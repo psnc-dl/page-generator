@@ -1,10 +1,12 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.model;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import pl.psnc.synat.a12.model.sort.LeftToRightOrder;
+import pl.psnc.synat.a12.model.sort.Sortable;
 
 public class LineEstimate implements BoxLine {
 

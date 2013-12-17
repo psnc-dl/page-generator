@@ -1,4 +1,4 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.model;
 
 import java.io.*;
 import org.apache.log4j.Logger;

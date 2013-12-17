@@ -2,7 +2,7 @@ package pl.psnc.synat.a12.generator.custom;
 
 import java.util.List;
 
-import pl.psnc.synat.a12.generator.DoubleConverter;
+import pl.psnc.synat.a12.common.DoubleConverter;
 
 import com.beust.jcommander.Parameter;
 

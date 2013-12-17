@@ -1,5 +1,7 @@
 package pl.psnc.synat.a12.aletheia;
 
+import pl.psnc.synat.a12.common.CLIUtils;
+import pl.psnc.synat.a12.aletheia.pagexml.PageXmlReader;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,17 +16,24 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.commons.io.FileUtils;
 
-import pl.psnc.synat.a12.aletheia.CLIUtils.Command;
-import pl.psnc.synat.a12.aletheia.PageXmlReader.Glyph;
+import pl.psnc.synat.a12.common.CLIUtils.Command;
+import pl.psnc.synat.a12.aletheia.pagexml.PageXmlReader.Glyph;
 import pl.psnc.synat.a12.common.ZipOutputFile;
-import pl.psnc.synat.a12.generator.BoundingBox;
+import pl.psnc.synat.a12.model.BoundingBox;
 import pl.psnc.synat.cutter.image.ImageProcesor;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import org.apache.log4j.Logger;
+import pl.psnc.synat.a12.generator.CLI;
 
+/**
+ * Class which cuts out glyphs from IMPACT-based transcript in PAGE XML format. 
+ * This is the first step, after reviewing the output of Cutter one can use
+ * {@link CLI} to creating Tesseract training images. Check out project documentation 
+ * for details.
+ */
 public class Cutter {
 
     private static final String TOKEN_GOTHIC = "_gothic";
@@ -79,7 +88,21 @@ public class Cutter {
     private int counter;
     private ZipOutputFile outputZipArchive;
 
+    public static void main(String[] args)
+            throws IOException, JAXBException {
+        Cutter proc = new Cutter();
+        JCommander engine = CLIUtils.createEngine("pl.psnc.synat.a12.aletheia.Cutter", proc.arguments);
 
+        try {
+            engine.parse(args);
+            CLIUtils.checkHelp(engine, proc.arguments);
+        } catch (ParameterException e) {
+            CLIUtils.handleParameterException(engine, e);
+            System.exit(1);
+        }
+        proc.run();
+    }
+    
     private void run()
             throws IOException, JAXBException {
         
@@ -167,19 +190,4 @@ public class Cutter {
         return new File(tempDirectory, filename.toString());
     }
 
-
-    public static void main(String[] args)
-            throws IOException, JAXBException {
-        Cutter proc = new Cutter();
-        JCommander engine = CLIUtils.createEngine("pl.psnc.synat.a12.aletheia.Cutter", proc.arguments);
-
-        try {
-            engine.parse(args);
-            CLIUtils.checkHelp(engine, proc.arguments);
-        } catch (ParameterException e) {
-            CLIUtils.handleParameterException(engine, e);
-            System.exit(1);
-        }
-        proc.run();
-    }
 }

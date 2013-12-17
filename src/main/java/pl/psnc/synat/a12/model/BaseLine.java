@@ -1,12 +1,13 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.model;
 
+import pl.psnc.synat.a12.common.StatUtils;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import pl.psnc.synat.a12.generator.custom.MultiMap;
+import pl.psnc.synat.a12.common.MultiMap;
 
 public class BaseLine extends BoxFilter {
 

@@ -30,7 +30,7 @@ public class ActionsController implements ActionListener {
 
 
     private ActionsController() {
-        // empty
+        // emptyGenerat
     }
 
 

@@ -1,4 +1,4 @@
-package pl.psnc.synat.a12.aletheia;
+package pl.psnc.synat.a12.common;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
@@ -8,7 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import pl.psnc.synat.a12.common.ZipExtractor;
 import pl.psnc.synat.a12.common.ZipOutputFile;
-import pl.psnc.synat.a12.generator.Page;
+import pl.psnc.synat.a12.model.Page;
 
 public final class CLIUtils {
 

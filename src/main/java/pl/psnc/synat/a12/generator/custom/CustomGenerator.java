@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import pl.psnc.synat.a12.generator.AbstractGenerator;
-import pl.psnc.synat.a12.generator.EmEstimate;
-import pl.psnc.synat.a12.generator.LetterBox;
+import pl.psnc.synat.a12.common.EmEstimate;
+import pl.psnc.synat.a12.model.LetterBox;
 
 public class CustomGenerator extends AbstractGenerator<CustomLine> {
 

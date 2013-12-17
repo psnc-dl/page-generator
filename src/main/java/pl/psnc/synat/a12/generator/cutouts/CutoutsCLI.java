@@ -5,16 +5,22 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import pl.psnc.synat.a12.generator.Page;
+import pl.psnc.synat.a12.model.Page;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import pl.psnc.synat.a12.aletheia.CLIUtils;
-import pl.psnc.synat.a12.generator.BaseLinesFile;
+import pl.psnc.synat.a12.common.CLIUtils;
+import pl.psnc.synat.a12.model.BaseLinesFile;
+import pl.psnc.synat.a12.generator.CLI;
 import pl.psnc.synat.a12.generator.CommonCliArgs;
 
+/**
+ * Cutouts (http://wlt.synat.pcss.pl/cutouts) equivalent of {@link CLI}. On top
+ * of zip with Cutouts output it prepares training images and box files for 
+ * Tesseract.
+ */
 public class CutoutsCLI {
     
     private static final Logger logger = Logger.getLogger(CutoutsCLI.class);

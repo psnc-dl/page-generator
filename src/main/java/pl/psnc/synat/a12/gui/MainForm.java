@@ -18,7 +18,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import org.apache.log4j.Logger;
 
-import pl.psnc.synat.a12.generator.LetterBox;
+import pl.psnc.synat.a12.model.LetterBox;
 import pl.psnc.synat.a12.generator.custom.LettersProvider;
 
 public class MainForm extends JFrame {

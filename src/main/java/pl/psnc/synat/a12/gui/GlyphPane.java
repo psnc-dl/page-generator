@@ -16,7 +16,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import pl.psnc.synat.a12.generator.LetterBox;
+import pl.psnc.synat.a12.model.LetterBox;
 
 public class GlyphPane extends JPanel implements ChangeListener {
 

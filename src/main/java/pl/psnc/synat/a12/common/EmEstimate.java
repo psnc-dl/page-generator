@@ -1,5 +1,8 @@
-package pl.psnc.synat.a12.generator;
+package pl.psnc.synat.a12.common;
 
+import pl.psnc.synat.a12.model.LetterBox;
+import pl.psnc.synat.a12.model.BoxLine;
+import pl.psnc.synat.a12.common.StatUtils;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -7,13 +10,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import pl.psnc.synat.a12.generator.custom.MultiMap;
 
+/**
+ * Calculates em width based on the given font.
+ */
 public class EmEstimate {
 
     private final static List<Character> emChars = Arrays.asList(new Character[] { 'M', 'W', 'm', 'w' });
 
-    private MultiMap<Character, Integer> lettersWidths = new MultiMap<Character, Integer>();
+    private final MultiMap<Character, Integer> lettersWidths = new MultiMap<Character, Integer>();
 
     private int emLetterCount;
     private int emValue;

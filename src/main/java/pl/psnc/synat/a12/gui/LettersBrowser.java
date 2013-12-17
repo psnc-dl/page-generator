@@ -7,8 +7,8 @@ import java.util.Map;
 import javax.swing.SwingUtilities;
 import org.apache.log4j.Logger;
 
-import pl.psnc.synat.a12.generator.BaseLinesFile;
-import pl.psnc.synat.a12.generator.ImageSelector;
+import pl.psnc.synat.a12.model.BaseLinesFile;
+import pl.psnc.synat.a12.model.ImageSelector;
 import pl.psnc.synat.a12.generator.custom.LettersProvider;
 
 public class LettersBrowser implements Runnable {
@@ -17,6 +17,14 @@ public class LettersBrowser implements Runnable {
 
     private LettersProvider alphabet;
     private MainForm frame;
+
+    public static void main(String[] args)
+            throws IOException {
+        final LettersBrowser browser = new LettersBrowser();
+        ActionsController.getInstance().setModel(browser);
+
+        SwingUtilities.invokeLater(browser);
+    }
 
     public void load(File storeFile)
             throws IOException {
@@ -39,14 +47,6 @@ public class LettersBrowser implements Runnable {
     public void run() {
         frame = new MainForm();
         frame.init();
-    }
-
-    public static void main(String[] args)
-            throws IOException {
-        final LettersBrowser browser = new LettersBrowser();
-        ActionsController.getInstance().setModel(browser);
-
-        SwingUtilities.invokeLater(browser);
     }
 
     public void updateFilter(boolean italics, boolean noise, boolean gothic) {

@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pl.psnc.synat.a12.generator.BoxLine;
-import pl.psnc.synat.a12.generator.LetterBox;
+import pl.psnc.synat.a12.model.BoxLine;
+import pl.psnc.synat.a12.model.LetterBox;
 
 public class CustomLine implements BoxLine {
 
