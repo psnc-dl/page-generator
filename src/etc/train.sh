@@ -2,7 +2,7 @@ NAME=$1
 TIFNAME=.png
 
 echo "combined 0 0 0 0 1" >font_properties
-./unicharset_extractor *.box 
+unicharset_extractor *.box 
 
 for x in `cat files.txt` 
 do
