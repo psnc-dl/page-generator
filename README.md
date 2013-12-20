@@ -13,15 +13,15 @@ creation of training images (generation of images). In the examples below `$PAGE
 is instead of real jar name.
 
 In order to prepare glyphs, you need to invoke:
-`java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.aletheia.Cutter --image imageName.png 
+```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.aletheia.Cutter --image imageName.png 
                                                                 --xml xmlName.xml 
-                                                                --output ./zipWithImages.zip`
+                                                                --output ./zipWithImages.zip```
 
 To generate images you need to:
-`java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.generator.CLI --input zipWithImages.zip 
+```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.generator.CLI --input zipWithImages.zip 
                                                               -w imageWidth 
                                                               -h imageHeight 
-                                                              --output ./output.zip`
+                                                              --output ./output.zip```
 
 As a result of second step you will get zip archive with cleaned training image and box file which might be used to fed Tesseract 
 training process. 
@@ -37,8 +37,8 @@ information whether glyph is noised, coordinates of glyph in the original image.
 
 Page generator can produce cleaned images based on the output from Cutouts, in order to do so, 
 you need to invoke it:
-`java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.generator.cutouts.CutoutsCLI --input zipWitCutoutsOutput.zip 
-                                                                              --output output`
+```java -cp $PAGE_GENERATOR_JAR pl.psnc.synat.a12.generator.cutouts.CutoutsCLI --input zipWitCutoutsOutput.zip 
+                                                                              --output output```
 
 Full list of available features will be listed after invocation of tool without any parameters
 
